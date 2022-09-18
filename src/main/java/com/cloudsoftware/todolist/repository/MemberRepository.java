@@ -14,12 +14,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "SELECT count(*) > 0 FROM member where id = ?1", nativeQuery = true)
     boolean existById(Long id);
 
-    @Query(value = "SELECT (password = ?2) FROM member where username = ?1", nativeQuery = true)
-    Boolean checkPasswordByUsername(String username, String password);
-
-    @Query(value = "SELECT password FROM member where username = ?1", nativeQuery = true)
-    String getPasswordByUsername(String username);
-
     @Query(value = "SELECT password FROM Member where id = ?1", nativeQuery = true)
     String getPasswordById(Long id);
 
@@ -30,6 +24,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "UPDATE member SET password = ?2 WHERE id = ?1", nativeQuery = true)
     void updatePassword(Long id, String newPassword);
 
-    @Query(value = "SELECT * FROM member where username = ?1", nativeQuery = true)
-    Member findByUsername(String username);
+    @Query(value = "SELECT * FROM member where username = ?1 and password = ?2", nativeQuery = true)
+    Member getWithUsernameAndPassword(String username, String password);
 }

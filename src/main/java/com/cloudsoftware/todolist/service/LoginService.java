@@ -9,6 +9,8 @@ import com.cloudsoftware.todolist.repository.MemberRepository;
 import com.cloudsoftware.todolist.util.PasswordHashUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class LoginService {
     private final LoginRepository loginRepository;
@@ -25,11 +27,13 @@ public class LoginService {
 
         password = PasswordHashUtil.sha512(password);
 
-        if (memberRepository.checkPasswordByUsername(username,password)) {
-            Member member = memberRepository.findByUsername(username);
-            loginRepository.save(new Login().create(member));
-        } else {
+        // todo kullanıcının şifresi doğru değilse ona göre exception gönder
+        Member member = memberRepository.getWithUsernameAndPassword(username, password);
+
+        if (Objects.isNull(member)){
             throw new MemberNotFoundException();
         }
+
+        loginRepository.save(new Login().create(member));
     }
 }

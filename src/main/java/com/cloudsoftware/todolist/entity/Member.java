@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
 @Table(name = "member")
@@ -20,6 +22,9 @@ public class Member {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy="member")
+    private Set<ToDo> todos;
 
     public Member() {
     }
@@ -55,5 +60,13 @@ public class Member {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<ToDo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(Set<ToDo> todos) {
+        this.todos = todos;
     }
 }
