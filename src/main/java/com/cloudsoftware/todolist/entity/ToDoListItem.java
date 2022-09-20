@@ -24,9 +24,6 @@ public class ToDoListItem {
     @JoinColumn(name="todo_list_id", nullable=false)
     private ToDoList toDoList;
 
-    @Column(name = "element_name", nullable = false)
-    private String elementName;
-
     @Column(name = "content")
     private String content;
 
@@ -42,7 +39,18 @@ public class ToDoListItem {
     private Date updatedDate = new Date();
 
     public ToDoListItem() {
+
     }
+
+    private ToDoListItem(ToDoList toDoList, String content) {
+        this.toDoList = toDoList;
+        this.content = content;
+    }
+
+    public static ToDoListItem createToDoListItem(ToDoList toDoList, String content) {
+        return new ToDoListItem(toDoList,content);
+    }
+
 
     public Long getId() {
         return id;
@@ -58,14 +66,6 @@ public class ToDoListItem {
 
     public void setToDoList(ToDoList toDoList) {
         this.toDoList = toDoList;
-    }
-
-    public String getElementName() {
-        return elementName;
-    }
-
-    public void setElementName(String elementName) {
-        this.elementName = elementName;
     }
 
     public String getContent() {

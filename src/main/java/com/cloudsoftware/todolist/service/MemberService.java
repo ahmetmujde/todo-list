@@ -68,7 +68,6 @@ public class MemberService {
         }
     }
 
-    // todo burayı refactor et olması gereken class password service ve method ismi güzel değil
     @Transactional
     public void memberCurrentPasswordChange(Long id, MemberCurrentPasswordChangeRequest memberCurrentPasswordChangeRequest) {
         String currentPassword = PasswordHashUtil.sha512(memberCurrentPasswordChangeRequest.getCurrentPassword());
@@ -103,5 +102,9 @@ public class MemberService {
         if (!currentPassword.equals(currentPasswordFromDB)) {
             throw new MemberPasswordNotEqualsException();
         }
+    }
+
+    public Member getMember(Long id){
+        return  memberRepository.getMemberById(id);
     }
 }

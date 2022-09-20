@@ -51,4 +51,21 @@ public class TodoListExceptionHandler {
 
         return new ErrorResponse<>(errorMessage);
     }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = ToDoListCannotBeNull.class)
+    public ErrorResponse<Object> handleContentNotBeNull(ToDoListCannotBeNull toDoListCannotBeNull) {
+        String errorMessage = toDoListCannotBeNull.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = ContentCannotBeNull.class)
+    public ErrorResponse<Object> handleContentNotBeNull(ContentCannotBeNull contentCannotBeNull) {
+        String errorMessage = contentCannotBeNull.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
+
 }

@@ -26,4 +26,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query(value = "SELECT * FROM member where username = ?1 and password = ?2", nativeQuery = true)
     Member getWithUsernameAndPassword(String username, String password);
+
+    @Query(value = "SELECT * FROM member where id = ?1", nativeQuery = true)
+    Member getMemberById(Long id);
 }

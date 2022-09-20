@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "todo_list")
@@ -26,7 +26,7 @@ public class ToDoList {
     private String toDoListName;
 
     @OneToMany(mappedBy="toDoList")
-    private Set<ToDoListItem> toDoListItems;
+    private List<ToDoListItem> toDoListItems;
 
     @ManyToOne
     @JoinColumn(name="member_id", nullable=false)
@@ -41,6 +41,15 @@ public class ToDoList {
     private Date updatedDate = new Date();
 
     public ToDoList() {
+    }
+
+    private ToDoList(String toDoListName, Member memberId) {
+        this.toDoListName = toDoListName;
+        this.memberId = memberId;
+    }
+
+    public static ToDoList createToDoList(String toDoListName, Member memberId) {
+        return new ToDoList(toDoListName,memberId);
     }
 
     public Long getId() {
@@ -59,11 +68,11 @@ public class ToDoList {
         this.toDoListName = toDoListName;
     }
 
-    public Set<ToDoListItem> getToDoListItems() {
+    public List<ToDoListItem> getToDoListItems() {
         return toDoListItems;
     }
 
-    public void setToDoListItems(Set<ToDoListItem> toDoListItems) {
+    public void setToDoListItems(List<ToDoListItem> toDoListItems) {
         this.toDoListItems = toDoListItems;
     }
 
