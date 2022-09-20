@@ -43,4 +43,12 @@ public class TodoListExceptionHandler {
 
         return new ErrorResponse<>(errorMessage);
     }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NewPasswordMustBeDifferentLastFivePasswordException.class)
+    public ErrorResponse<Object> handleContentNotBeNull(NewPasswordMustBeDifferentLastFivePasswordException newPasswordMustBeDifferentLastFivePasswordException) {
+        String errorMessage = newPasswordMustBeDifferentLastFivePasswordException.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
 }

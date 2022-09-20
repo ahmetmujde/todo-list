@@ -23,8 +23,8 @@ public class Member {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy="member")
-    private Set<ToDo> todos;
+    @OneToMany(mappedBy="memberId")
+    private Set<ToDoList> ToDoList;
 
     public Member() {
     }
@@ -62,11 +62,11 @@ public class Member {
         this.password = password;
     }
 
-    public Set<ToDo> getTodos() {
-        return todos;
+    public Set<com.cloudsoftware.todolist.entity.ToDoList> getToDoList() {
+        return ToDoList;
     }
 
-    public void setTodos(Set<ToDo> todos) {
-        this.todos = todos;
+    public void setToDoList(Set<com.cloudsoftware.todolist.entity.ToDoList> toDoList) {
+        ToDoList = toDoList;
     }
 }
