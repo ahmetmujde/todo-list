@@ -46,7 +46,7 @@ public class TodoListExceptionHandler {
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NewPasswordMustBeDifferentLastFivePasswordException.class)
-    public ErrorResponse<Object> handleContentNotBeNull(NewPasswordMustBeDifferentLastFivePasswordException newPasswordMustBeDifferentLastFivePasswordException) {
+    public ErrorResponse<Object> handleNewPasswordMustBeDifferentLastFivePasswordException(NewPasswordMustBeDifferentLastFivePasswordException newPasswordMustBeDifferentLastFivePasswordException) {
         String errorMessage = newPasswordMustBeDifferentLastFivePasswordException.getMessage();
 
         return new ErrorResponse<>(errorMessage);
@@ -54,16 +54,16 @@ public class TodoListExceptionHandler {
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = ToDoListCannotBeNull.class)
-    public ErrorResponse<Object> handleContentNotBeNull(ToDoListCannotBeNull toDoListCannotBeNull) {
+    public ErrorResponse<Object> handleToDoListCannotBeNull(ToDoListCannotBeNull toDoListCannotBeNull) {
         String errorMessage = toDoListCannotBeNull.getMessage();
 
         return new ErrorResponse<>(errorMessage);
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = ContentCannotBeNull.class)
-    public ErrorResponse<Object> handleContentNotBeNull(ContentCannotBeNull contentCannotBeNull) {
-        String errorMessage = contentCannotBeNull.getMessage();
+    @ExceptionHandler(value = ContentCannotBeNullException.class)
+    public ErrorResponse<Object> handleContentNotBeNull(ContentCannotBeNullException contentCannotBeNullException) {
+        String errorMessage = contentCannotBeNullException.getMessage();
 
         return new ErrorResponse<>(errorMessage);
     }

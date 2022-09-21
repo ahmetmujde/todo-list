@@ -1,9 +1,10 @@
 package com.cloudsoftware.todolist.service;
 
 import com.cloudsoftware.todolist.dto.request.ToDoListCreateRequest;
+import com.cloudsoftware.todolist.dto.request.ToDoListUpdateNameRequest;
+import com.cloudsoftware.todolist.dto.response.ToDoListUpdateNameResponse;
 import com.cloudsoftware.todolist.entity.Member;
 import com.cloudsoftware.todolist.entity.ToDoList;
-import com.cloudsoftware.todolist.exception.ContentCannotBeNull;
 import com.cloudsoftware.todolist.exception.ToDoListCannotBeNull;
 import com.cloudsoftware.todolist.repository.ToDoListRepository;
 import org.springframework.stereotype.Service;
@@ -28,16 +29,29 @@ public class ToDoListService {
 
         Member member = memberService.getMember(memberId);
 
-        if (Objects.isNull(toDoListCreateRequest.getToDoListName())){
-            throw new ToDoListCannotBeNull();
-        }
-
-        if (Objects.isNull(toDoListCreateRequest.getToDoListItems())){
-            throw new ContentCannotBeNull();
-        }
+        checkNullableToDoList(toDoListCreateRequest);
 
         ToDoList toDoList = toDoListRepository.save(ToDoList.createToDoList(toDoListCreateRequest.getToDoListName(), member));
 
         toDoListCreateRequest.getToDoListItems().forEach(content -> toDoListItemService.createToDoListItem(toDoList, content));
     }
+
+    public ToDoListUpdateNameResponse updateToDoListName(Long memberId, ToDoListUpdateNameRequest toDoListUpdateNameRequest) {
+        memberService.isValidMember(memberId);
+
+        toDoListRepository.updateToDoListName(memberId, toDoListUpdateNameRequest.getToDoListName(), toDoListUpdateNameRequest.getTodoListId());
+
+        return new ToDoListUpdateNameResponse(toDoListUpdateNameRequest.getToDoListName());
+    }
+
+    private void checkNullableToDoList(ToDoListCreateRequest toDoListCreateRequest) {
+        if (Objects.isNull(toDoListCreateRequest.getToDoListName())) {
+            throw new ToDoListCannotBeNull();
+        }
+
+        if ((Objects.isNull(toDoListCreateRequest.getToDoListItems())) || (toDoListCreateRequest.getToDoListItems().size() == 0)) {
+            throw new ToDoListCannotBeNull();
+        }
+    }
+
 }
