@@ -78,7 +78,7 @@ public class MemberService {
 
         newPassword = passwordService.createPassword(newPassword);
 
-        passwordHistoryService.validatePasswordNotEqualsLastFivePassword(id,newPassword);
+        passwordHistoryService.validatePasswordNotEqualsLastFivePassword(id, newPassword);
 
         memberRepository.updatePassword(id, newPassword);
 
@@ -104,7 +104,15 @@ public class MemberService {
         }
     }
 
-    public Member getMember(Long id){
-        return  memberRepository.getMemberById(id);
+    public Member getMember(Long memberId) {
+        isValidMember(memberId);
+
+        return memberRepository.getMemberById(memberId);
+    }
+
+    public void isValidMember(Long memberId) {
+        if (Objects.isNull(memberRepository.getMemberById(memberId))) {
+            throw new MemberNotFoundException();
+        }
     }
 }

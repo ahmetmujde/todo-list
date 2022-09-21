@@ -20,7 +20,7 @@ public class LoginController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void login(@RequestBody LoginRequest loginRequest){
+    public void login(@RequestBody LoginRequest loginRequest) {
         loginService.memberLogin(loginRequest);
     }
 }

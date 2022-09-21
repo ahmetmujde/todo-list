@@ -30,7 +30,7 @@ public class LoginService {
         // todo kullanıcının şifresi doğru değilse ona göre exception gönder
         Member member = memberRepository.getWithUsernameAndPassword(username, password);
 
-        if (Objects.isNull(member)){
+        if (Objects.isNull(member)) {
             throw new MemberNotFoundException();
         }
 

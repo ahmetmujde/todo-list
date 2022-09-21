@@ -23,7 +23,7 @@ public class Member {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy="memberId")
+    @OneToMany(mappedBy = "memberId")
     private Set<ToDoList> ToDoList;
 
     public Member() {

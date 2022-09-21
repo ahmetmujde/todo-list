@@ -21,7 +21,7 @@ public class ToDoListItem {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="todo_list_id", nullable=false)
+    @JoinColumn(name = "todo_list_id", nullable = false)
     private ToDoList toDoList;
 
     @Column(name = "content")
@@ -48,7 +48,7 @@ public class ToDoListItem {
     }
 
     public static ToDoListItem createToDoListItem(ToDoList toDoList, String content) {
-        return new ToDoListItem(toDoList,content);
+        return new ToDoListItem(toDoList, content);
     }
 
 

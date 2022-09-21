@@ -25,11 +25,11 @@ public class ToDoList {
     @Column(name = "todo_list_name", nullable = false)
     private String toDoListName;
 
-    @OneToMany(mappedBy="toDoList")
+    @OneToMany(mappedBy = "toDoList")
     private List<ToDoListItem> toDoListItems;
 
     @ManyToOne
-    @JoinColumn(name="member_id", nullable=false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member memberId;
 
     @Column(name = "created_date", nullable = false)
@@ -49,7 +49,7 @@ public class ToDoList {
     }
 
     public static ToDoList createToDoList(String toDoListName, Member memberId) {
-        return new ToDoList(toDoListName,memberId);
+        return new ToDoList(toDoListName, memberId);
     }
 
     public Long getId() {
