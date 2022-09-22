@@ -68,4 +68,22 @@ public class TodoListExceptionHandler {
         return new ErrorResponse<>(errorMessage);
     }
 
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = ListNotFoundException.class)
+    public ErrorResponse<Object> handleListNotFoundException(ListNotFoundException listNotFoundException) {
+        String errorMessage = listNotFoundException.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
+
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NoMatchAListById.class)
+    public ErrorResponse<Object> handleNoMatchAListById(NoMatchAListById noMatchAListById) {
+        String errorMessage = noMatchAListById.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
+
 }

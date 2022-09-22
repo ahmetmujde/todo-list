@@ -1,5 +1,6 @@
 package com.cloudsoftware.todolist.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class ToDoList {
     @Column(name = "todo_list_name", nullable = false)
     private String toDoListName;
 
-    @OneToMany(mappedBy = "toDoList")
+    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
     private List<ToDoListItem> toDoListItems;
 
     @ManyToOne
