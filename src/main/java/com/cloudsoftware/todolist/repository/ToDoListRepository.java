@@ -22,5 +22,11 @@ public interface ToDoListRepository extends JpaRepository<ToDoList, Long> {
     List <String> readToDoLists(Long memberId);
 
     @Query(value = "select count(*) > 0 from todo_list where member_id = ?1 and todo_list.id = ?2", nativeQuery = true)
-    boolean checkListById(Long memberId, Long todoListId);
+    boolean checkListById(Long memberId, Long toDoListId);
+
+    @Query(value = "select * from todo_list where member_id = ?1 and todo_list.id = ?2", nativeQuery = true)
+    ToDoList getToDoListById(Long memberId, Long toDoListId);
+
+    @Query(value = "select todo_list_name from todo_list where member_id = ?1 and todo_list.id = ?2", nativeQuery = true)
+    String getToDoListNameByIdById(Long memberId, Long toDoListId);
 }

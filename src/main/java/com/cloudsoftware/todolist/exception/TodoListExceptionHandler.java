@@ -53,9 +53,9 @@ public class TodoListExceptionHandler {
     }
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = ToDoListCannotBeNull.class)
-    public ErrorResponse<Object> handleToDoListCannotBeNull(ToDoListCannotBeNull toDoListCannotBeNull) {
-        String errorMessage = toDoListCannotBeNull.getMessage();
+    @ExceptionHandler(value = ToDoListCannotBeNullException.class)
+    public ErrorResponse<Object> handleToDoListCannotBeNull(ToDoListCannotBeNullException toDoListCannotBeNullException) {
+        String errorMessage = toDoListCannotBeNullException.getMessage();
 
         return new ErrorResponse<>(errorMessage);
     }
@@ -70,20 +70,37 @@ public class TodoListExceptionHandler {
 
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = ListNotFoundException.class)
-    public ErrorResponse<Object> handleListNotFoundException(ListNotFoundException listNotFoundException) {
-        String errorMessage = listNotFoundException.getMessage();
+    @ExceptionHandler(value = ToDoListNotFoundException.class)
+    public ErrorResponse<Object> handleListNotFoundException(ToDoListNotFoundException toDoListNotFoundException) {
+        String errorMessage = toDoListNotFoundException.getMessage();
 
         return new ErrorResponse<>(errorMessage);
     }
 
 
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = NoMatchAListById.class)
-    public ErrorResponse<Object> handleNoMatchAListById(NoMatchAListById noMatchAListById) {
-        String errorMessage = noMatchAListById.getMessage();
+    @ExceptionHandler(value = NoMatchAListByIdException.class)
+    public ErrorResponse<Object> handleNoMatchAListById(NoMatchAListByIdException noMatchAListByIdException) {
+        String errorMessage = noMatchAListByIdException.getMessage();
 
         return new ErrorResponse<>(errorMessage);
     }
 
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = ToDoListItemCannotBeNullException.class)
+    public ErrorResponse<Object> handleToDoListItemCannotBeNull(ToDoListItemCannotBeNullException toDoListItemCannotBeNullException) {
+        String errorMessage = toDoListItemCannotBeNullException.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
+
+
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NoMatchingWithAnyToDoListException.class)
+    public ErrorResponse<Object> handleNoMatchingWithAnyToDoListException(NoMatchingWithAnyToDoListException noMatchingWithAnyToDoListException) {
+        String errorMessage = noMatchingWithAnyToDoListException.getMessage();
+
+        return new ErrorResponse<>(errorMessage);
+    }
 }

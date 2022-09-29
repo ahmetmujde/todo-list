@@ -3,6 +3,7 @@ package com.cloudsoftware.todolist.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,8 @@ public class ToDoList {
     @Column(name = "todo_list_name", nullable = false)
     private String toDoListName;
 
-    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ToDoListItem> toDoListItems;
 
     @ManyToOne

@@ -4,6 +4,7 @@ package com.cloudsoftware.todolist.controller;
 import com.cloudsoftware.todolist.dto.request.ToDoListCreateRequest;
 import com.cloudsoftware.todolist.dto.request.ToDoListDeleteRequest;
 import com.cloudsoftware.todolist.dto.request.ToDoListUpdateNameRequest;
+import com.cloudsoftware.todolist.dto.response.ListResponse;
 import com.cloudsoftware.todolist.dto.response.ReadToDoListResponse;
 import com.cloudsoftware.todolist.dto.response.ToDoListUpdateNameResponse;
 import com.cloudsoftware.todolist.service.ToDoListService;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
 @RestController
 @RequestMapping("todolist")
@@ -56,4 +57,8 @@ public class ToDoListController {
         toDoListService.deleteToDoList(memberId, toDoListDeleteRequest);
     }
 
+    @GetMapping("{memberId}/all")
+    public List<ListResponse> getAllList(@PathVariable("memberId") Long memberId) {
+        return toDoListService.getAllToDoList(memberId);
+    }
 }
