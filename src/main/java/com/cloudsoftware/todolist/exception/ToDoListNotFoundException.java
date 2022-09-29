@@ -1,8 +1,8 @@
 package com.cloudsoftware.todolist.exception;
 
-public class ListNotFoundException extends RuntimeException {
+public class ToDoListNotFoundException extends RuntimeException {
 
-    public ListNotFoundException() {
+    public ToDoListNotFoundException() {
         super("İslem yapmak istediginiz to do list bulunamadi");
     }
 }
